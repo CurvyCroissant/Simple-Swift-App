@@ -1,10 +1,3 @@
-//
-//  MerchantFormResultView.swift
-//  Simple Swift App
-//
-//  Created by ITBCA on 19/08/26.
-//
-
 import SwiftUI
 
 struct MerchantFormResultView: View {

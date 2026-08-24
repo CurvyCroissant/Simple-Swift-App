@@ -1,14 +1,6 @@
-//
-//  MerchantFormViewModel.swift
-//  Simple Swift App
-//
-//  Created by ITBCA on 19/08/26.
-//
-
 import SwiftUI
 import Combine
 
-// checks if an input field has been interacted with by the user or not
 struct ValidatedField {
     var text: String = "" {
         didSet {
@@ -18,10 +10,7 @@ struct ValidatedField {
     var hasInteracted: Bool = false
 }
 
-// "ObservableObject", protocol so that the class can be observed by Views. Usually has "@Published" properties for triggering View updates when changed
 class MerchantFormViewModel: ObservableObject {
-    
-    // "@Published", when its value changes, all Views observing that object are updated.
     @Published var ktp = ValidatedField()
     @Published var npwp = ValidatedField()
     @Published var kodePos = ValidatedField()

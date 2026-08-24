@@ -1,19 +1,9 @@
-//
-//  ValidatedTextField.swift
-//  Simple Swift App
-//
-//  Created by ITBCA on 24/08/26.
-//
-
 import SwiftUI
 
 struct ValidatedTextField: View {
-    
-    // constant cuz they're only read to setup UI
     let title: String
     let errorMessage: String
     
-    // binding cuz component needs to write data back to parent
     @Binding var text: String
     
     var body: some View {

@@ -1,22 +1,11 @@
-//
-//  MerchantFormView.swift
-//  Simple Swift App
-//
-//  Created by ITBCA on 19/08/26.
-//
-
 import SwiftUI
 
 struct MerchantFormView: View {
-    
-    // StateObject used in View to own an ObservableObject instance. View creates and holds object, making it persist as long as View exists.
     @StateObject private var viewModel = MerchantFormViewModel()
-    
-    // grab navigator from env
     @EnvironmentObject private var navigator: AppNavigator
 
     var body: some View {
-        NavigationStack(path: $navigator.path) { // only in the root of the navigation flow
+        NavigationStack(path: $navigator.path) {
             Form {
                 Section {
                     ValidatedTextField (
@@ -43,8 +32,6 @@ struct MerchantFormView: View {
                 Section {
                     Button {
                         if viewModel.canSubmit {
-                            
-                            // ask navigator to handle routing
                             navigator.navigate(to: .result(
                                 ktp: viewModel.ktp.text,
                                 npwp: viewModel.npwp.text,
@@ -61,8 +48,6 @@ struct MerchantFormView: View {
                     .disabled(!viewModel.canSubmit)
                 }
             }
-            
-            // maps enum to actual view
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case let .result(ktp, npwp, kodePos, namaUsaha):
