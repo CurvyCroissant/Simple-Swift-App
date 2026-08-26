@@ -13,12 +13,12 @@ struct ValidatedField {
 class MerchantFormViewModel: ObservableObject {
     @Published var ktp = ValidatedField()
     @Published var npwp = ValidatedField()
-    @Published var kodePos = ValidatedField()
+    @Published var nomorRekening = ValidatedField()
     @Published var namaUsaha = ValidatedField()
     
     let maxLengthKtp: Int = 16
     let maxLengthNpwp: Int = 16
-    let maxLengthKodePos: Int = 5
+    let maxLengthNomorRekening: Int = 5
     let maxLengthNamaUsaha: Int = 23
     
     func isFieldEmpty(text: String) -> Bool {
@@ -41,14 +41,14 @@ class MerchantFormViewModel: ObservableObject {
     var isNpwpValid: Bool {
         !isFieldEmpty(text: npwp.text) && isWithinLimit(text: npwp.text, n: maxLengthNpwp)
     }
-    var isKodePosValid: Bool {
-        !isFieldEmpty(text: kodePos.text) && isWithinLimit(text: kodePos.text, n: maxLengthKodePos)
+    var isNomorRekeningValid: Bool {
+        !isFieldEmpty(text: nomorRekening.text) && isWithinLimit(text: nomorRekening.text, n: maxLengthNomorRekening)
     }
     var isNamaUsahaValid: Bool {
         !isFieldEmpty(text: namaUsaha.text) && isWithinLimit(text: namaUsaha.text, n: maxLengthNamaUsaha)
     }
     
     var canSubmit: Bool {
-        isKtpValid && isNpwpValid && isKodePosValid && isNamaUsahaValid
+        isKtpValid && isNpwpValid && isNomorRekeningValid && isNamaUsahaValid
     }
 }
