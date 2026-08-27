@@ -9,7 +9,7 @@ struct MerchantFormView: View {
 
     var body: some View {
         NavigationStack(path: $navigator.path) {
-            BaseFormLayout(title: "Registrasi Pengguna") {
+            BaseFormLayout(title: "Registrasi 1/3") {
                 Form {
                     Section {
                         VStack(spacing: 0) {
@@ -23,6 +23,7 @@ struct MerchantFormView: View {
                                 if viewModel.ktp.text != formatted {
                                     viewModel.ktp.text = formatted
                                 }
+                                repository.draftKtp = formatted
                             }
                             
                             ValidatedTextField(
@@ -36,6 +37,7 @@ struct MerchantFormView: View {
                                 if viewModel.npwp.text != limited {
                                     viewModel.npwp.text = limited
                                 }
+                                repository.draftNpwp = limited
                             }
                             
                             ValidatedTextField(
@@ -46,9 +48,9 @@ struct MerchantFormView: View {
                             .onChange(of: viewModel.nomorRekening.text) { newValue in
                                 let digits = viewModel.rawDigits(newValue)
                                 let limited = String(digits.prefix(viewModel.maxLengthNomorRekening))
-                                if viewModel.nomorRekening.text != limited {
-                                    viewModel.nomorRekening.text = limited
+                                if viewModel.nomorRekening.text != limited { viewModel.nomorRekening.text = limited
                                 }
+                                repository.draftNomorRekening = limited
                             }
                             
                             ValidatedTextField(
@@ -57,9 +59,12 @@ struct MerchantFormView: View {
                                 text: $viewModel.namaUsaha.text
                             )
                             .onChange(of: viewModel.namaUsaha.text) { newValue in
+                                var finalValue = newValue
                                 if newValue.count > viewModel.maxLengthNamaUsaha {
-                                    viewModel.namaUsaha.text = String(newValue.prefix(viewModel.maxLengthNamaUsaha))
+                                    finalValue = String(newValue.prefix(viewModel.maxLengthNamaUsaha))
+                                    viewModel.namaUsaha.text = finalValue
                                 }
+                                repository.draftNamaUsaha = finalValue
                             }
                         }
                     }
@@ -73,6 +78,14 @@ struct MerchantFormView: View {
                     )
                 }
                 .scrollContentBackground(.hidden)
+                .onAppear {
+                    if viewModel.ktp.text.isEmpty && !repository.draftKtp.isEmpty {
+                        viewModel.ktp.text = repository.draftKtp
+                        viewModel.npwp.text = repository.draftNpwp
+                        viewModel.nomorRekening.text = repository.draftNomorRekening
+                        viewModel.namaUsaha.text = repository.draftNamaUsaha
+                    }
+                }
             }
             bottomButton: {
                     Button {
@@ -103,10 +116,12 @@ struct MerchantFormView: View {
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
+                case let .photoUpload(merchant):
+                    MerchantPhotoView(merchant: merchant)
+                case let .details(merchant):
+                    MerchantDetailsView(merchant: merchant)
                 case let .result(merchant):
                     MerchantFormResultView(merchant: merchant)
-                case let .photoUpload(merchant: merchant):
-                    MerchantPhotoView(merchant: merchant)
                 }
             }
         }

@@ -86,7 +86,7 @@ class MerchantFormViewModel: ObservableObject {
         if namaUsaha.text.count > maxLengthNamaUsaha {
             return "Nama Usaha maksimal 23 karakter."
         }
-        return "Tidak boleh diawali atau diakhiri dengan spasi (maks 23 karakter)."
+        return "Tidak boleh diawali/diakhiri spasi (maks 23 karakter)."
     }
     
     // MARK: FORMATTER

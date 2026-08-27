@@ -13,7 +13,7 @@ struct MerchantPhotoView: View {
     @State private var cameraData: Data? = nil
     
     var body: some View {
-        BaseFormLayout(title: "Registrasi Pengguna") {
+        BaseFormLayout(title: "Registrasi 2/3") {
             Form {
                 Section {
                     VStack(alignment: .leading, spacing: 10) {
@@ -71,10 +71,9 @@ struct MerchantPhotoView: View {
         } bottomButton: {
             Button {
                 if viewModel.canSubmit {
-                    var finalMerchant = merchant
-                    finalMerchant.foto = viewModel.selectedImageData
-                    repository.save(merchant: finalMerchant)
-                    navigator.navigate(to: .result(merchant: finalMerchant))
+                    var nextMerchant = merchant
+                    nextMerchant.foto = viewModel.selectedImageData
+                    navigator.navigate(to: .details(merchant: nextMerchant))
                 }
             } label: {
                 Text("Lanjut")

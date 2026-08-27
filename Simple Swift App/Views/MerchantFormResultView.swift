@@ -8,10 +8,31 @@ struct MerchantFormResultView: View {
     private func formatDisplayKTP(_ text: String) -> String {
         var formatted = ""
         for (index, char) in text.enumerated() {
-            if index != 0 && index % 4 == 0 { formatted.append(" ") }
+            if index != 0 && index % 4 == 0 {
+                formatted.append(" ")
+            }
             formatted.append(char)
         }
         return formatted
+    }
+    
+    private func formatRupiahDisplay(_ text: String) -> String {
+        guard let number = Int64(text) else {
+            return text
+        }
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = "."
+        return formatter.string(from: NSNumber(value: number)) ?? text
+    }
+    
+    private func formatTanggal(_ date: Date?) -> String {
+        guard let date = date else {
+            return "-"
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
     
     var body: some View {
@@ -38,6 +59,11 @@ struct MerchantFormResultView: View {
                         .frame(height: 150)
                         .cornerRadius(10)
                 }
+                
+                Text("Nama: \n\(merchant.nama)")
+                Text("Nomor HP: \n\(merchant.nomorHp.isEmpty ? "-" : merchant.nomorHp)")
+                Text("Nominal: \nRp \(formatRupiahDisplay(merchant.nominal))")
+                Text("Tanggal: \n\(formatTanggal(merchant.tanggal))")
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)

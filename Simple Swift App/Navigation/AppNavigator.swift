@@ -6,6 +6,7 @@ import Combine
 enum Route: Hashable {
     case result(merchant: MerchantModel)
     case photoUpload(merchant: MerchantModel)
+    case details(merchant: MerchantModel)
 }
 
 class AppNavigator: ObservableObject {

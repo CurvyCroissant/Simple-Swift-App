@@ -23,7 +23,7 @@ class MerchantPhotoViewModel: ObservableObject {
     
     func processRawData(_ data: Data) {
         if data.count > self.maxFileSize {
-            self.errorMessage = "Ukuran file maksimal 5MB."
+            self.errorMessage = "Ukuran file maks 5MB."
             self.selectedImageData = nil
         } else {
             self.errorMessage = ""
