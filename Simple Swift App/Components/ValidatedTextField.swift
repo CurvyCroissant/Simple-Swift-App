@@ -1,3 +1,5 @@
+// Components/ValidatedTextField.swift
+
 import SwiftUI
 
 struct ValidatedTextField: View {
@@ -21,6 +23,7 @@ struct ValidatedTextField: View {
                 .foregroundColor(.red)
                 .font(.caption)
                 .opacity(errorMessage.isEmpty ? 0 : 1)
+                .lineLimit(2, reservesSpace: true)
         }
         .listRowSeparator(.hidden)
         .padding(.bottom, 10)

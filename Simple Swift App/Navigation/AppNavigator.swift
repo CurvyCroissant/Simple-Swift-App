@@ -1,8 +1,11 @@
+// Navigation/AppNavigator.swiftN
+
 import SwiftUI
 import Combine
 
 enum Route: Hashable {
-    case result(ktp: String, npwp: String, nomorRekening: String, namaUsaha: String)
+    case result(merchant: MerchantModel)
+    case photoUpload(merchant: MerchantModel)
 }
 
 class AppNavigator: ObservableObject {
