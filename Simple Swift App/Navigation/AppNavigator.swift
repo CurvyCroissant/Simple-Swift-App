@@ -7,10 +7,20 @@ enum Route: Hashable {
     case result(merchant: MerchantModel)
     case photoUpload(merchant: MerchantModel)
     case details(merchant: MerchantModel)
+    case editForm(merchant: MerchantModel)
 }
 
 class AppNavigator: ObservableObject {
     @Published var path = [Route]()
+    
+    func jumpToEdit(route: Route?) {
+        if let route = route {
+            // Rebuild stack directly to target page
+            path = [route]
+        } else {
+            popToRoot()
+        }
+    }
     
     func navigate(to route: Route) {
         path.append(route)

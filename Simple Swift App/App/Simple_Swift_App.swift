@@ -9,9 +9,23 @@ struct Simple_Swift_App: App {
     
     var body: some Scene {
         WindowGroup {
-            MerchantFormView()
-                .environmentObject(navigator)
-                .environmentObject(repository)
+            NavigationStack(path: $navigator.path) {
+                MerchantFormView()
+                    .navigationDestination(for: Route.self) { route in
+                        switch route {
+                        case let .photoUpload(merchant):
+                            MerchantPhotoView(merchant: merchant)
+                        case let .details(merchant):
+                            MerchantDetailsView(merchant: merchant)
+                        case let .result(merchant):
+                            MerchantFormResultView(merchant: merchant)
+                        case .editForm:
+                            MerchantFormView()
+                        }
+                    }
+            }
+            .environmentObject(navigator)
+            .environmentObject(repository)
         }
     }
 }

@@ -19,6 +19,8 @@ struct MerchantPhotoView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Upload Gambar")
                             .font(.body)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color(red: 0.09, green: 0.36, blue: 0.62))
                         
                         Text(viewModel.errorMessage.isEmpty ? "Maksimal 5MB. Format: PNG, JPG, JPEG, HEIF." : viewModel.errorMessage)
                             .font(.caption)
@@ -27,7 +29,6 @@ struct MerchantPhotoView: View {
                         Button {
                             showSourceSelector = true
                         } label: {
-                            // if available, show uploaded image. else, show camera icon
                             if let imageData = viewModel.selectedImageData, let uiImage = UIImage(data: imageData) {
                                 Image(uiImage: uiImage)
                                     .resizable()
@@ -37,7 +38,7 @@ struct MerchantPhotoView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                             } else {
                                 Image(systemName: "camera")
-                                    .font(.system(size: 20))
+                                    .font(.title)
                                     .foregroundColor(.black)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 150)
@@ -49,6 +50,8 @@ struct MerchantPhotoView: View {
                         .buttonStyle(.plain)
                     }
                     .padding(.vertical, 5)
+                    .opacity(repository.activeEditField == .none || repository.activeEditField == .foto ? 1.0 : 0.0)
+                    .disabled(repository.activeEditField != .none && repository.activeEditField != .foto)
                 }
                 .listRowBackground(
                     Rectangle()
@@ -73,7 +76,12 @@ struct MerchantPhotoView: View {
                 if viewModel.canSubmit {
                     var nextMerchant = merchant
                     nextMerchant.foto = viewModel.selectedImageData
-                    navigator.navigate(to: .details(merchant: nextMerchant))
+                    
+                    if repository.activeEditField != .none {
+                        navigator.path = [.result(merchant: nextMerchant)]
+                    } else {
+                        navigator.navigate(to: .details(merchant: nextMerchant))
+                    }
                 }
             } label: {
                 Text("Lanjut")

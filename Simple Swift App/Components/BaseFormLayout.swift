@@ -29,6 +29,14 @@ struct BaseFormLayout<Content: View, BottomButton: View>: View {
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.white)
+            }
+        }
         .toolbarBackground(Color(red: 0.09, green: 0.36, blue: 0.62), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)

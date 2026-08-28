@@ -22,10 +22,16 @@ struct MerchantModel: Hashable, Codable {
     var tanggal: Date? = nil
 }
 
+enum EditField: Equatable {
+    case none, ktp, npwp, nomorRekening, namaUsaha, foto, nama, nomorHp, nominal, tanggal
+}
+
 // MARK: DB MANAGER
 class MerchantRepository: ObservableObject {
     // Local in-memory DB
     @Published private(set) var savedMerchants: [MerchantModel] = []
+    
+    @Published var activeEditField: EditField = .none
     
     // Save user draft
     @Published var draftKtp = ""
@@ -58,6 +64,23 @@ class MerchantRepository: ObservableObject {
         formatter.dateFormat = "yyyy-MM-dd"
         let tanggalStr = merchant.tanggal != nil ? formatter.string(from: merchant.tanggal!) : "Kosong"
         
-        print("LOG: Successfully saved merchant! ktp: \(merchant.ktp), npwp: \(merchant.npwp), nomorRekening: \(merchant.nomorRekening), namaUsaha: \(merchant.namaUsaha), foto: \(fotoStatus), nama: \(merchant.nama), nomorHp: \(merchant.nomorHp), nominal: \(merchant.nominal), tanggal: \(tanggalStr)")
+        print("LOG: Successfully saved merchant. ktp: \(merchant.ktp), npwp: \(merchant.npwp), nomorRekening: \(merchant.nomorRekening), namaUsaha: \(merchant.namaUsaha), foto: \(fotoStatus), nama: \(merchant.nama), nomorHp: \(merchant.nomorHp), nominal: \(merchant.nominal), tanggal: \(tanggalStr)")
+    }
+    
+    func reset() {
+        savedMerchants.removeAll()
+        draftPhoto = nil
+        draftKtp = ""
+        draftNpwp = ""
+        draftNomorRekening = ""
+        draftNamaUsaha = ""
+        draftNama = ""
+        draftNomorHp = ""
+        draftNominal = ""
+        draftTanggal = ""
+        
+        activeEditField = .none
+        
+        print("LOG: Repository completely reset.")
     }
 }

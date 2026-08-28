@@ -6,7 +6,9 @@ import Combine
 struct ValidatedField {
     var text: String = "" {
         didSet {
-            hasInteracted = true
+            if text != oldValue { 
+                hasInteracted = true 
+            }
         }
     }
     var hasInteracted: Bool = false
@@ -22,6 +24,13 @@ class MerchantFormViewModel: ObservableObject {
     let maxLengthNpwp: Int = 16
     let maxLengthNomorRekening: Int = 16
     let maxLengthNamaUsaha: Int = 23
+    
+    func reset() {
+        ktp = ValidatedField()
+        npwp = ValidatedField()
+        nomorRekening = ValidatedField()
+        namaUsaha = ValidatedField()
+    }
     
     // Extract raw digits from formatted text
     func rawDigits(_ text: String) -> String {

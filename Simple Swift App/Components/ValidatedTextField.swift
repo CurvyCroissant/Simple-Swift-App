@@ -16,6 +16,8 @@ struct ValidatedTextField: View {
         LazyVStack(alignment: .leading, spacing: 5) {
             Text(title)
                 .font(.body)
+                .fontWeight(.heavy)
+                .foregroundColor(Color(red: 0.09, green: 0.36, blue: 0.62))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack(spacing: 8) {
