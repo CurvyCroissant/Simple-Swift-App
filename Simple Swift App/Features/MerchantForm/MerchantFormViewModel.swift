@@ -30,25 +30,19 @@ class MerchantFormViewModel: ObservableObject {
     
     // MARK: VALIDATION CHECKS
     var isKtpValid: Bool {
-        let raw = rawDigits(ktp.text)
-        return raw.count == lengthKtp
+        return MerchantModel.isKtpValid(ktp.text)
     }
     
     var isNpwpValid: Bool {
-        let raw = rawDigits(npwp.text)
-        return !raw.isEmpty && raw.count <= maxLengthNpwp
+        return MerchantModel.isNpwpValid(npwp.text)
     }
     
     var isNomorRekeningValid: Bool {
-        let raw = rawDigits(nomorRekening.text)
-        return !raw.isEmpty && raw.count <= maxLengthNomorRekening
+        return MerchantModel.isNomorRekeningValid(nomorRekening.text)
     }
     
     var isNamaUsahaValid: Bool {
-        if namaUsaha.text.isEmpty {
-            return true
-        }
-        return namaUsaha.text.count <= maxLengthNamaUsaha && !namaUsaha.text.hasPrefix(" ") && !namaUsaha.text.hasSuffix(" ")
+        return MerchantModel.isNamaUsahaValid(namaUsaha.text)
     }
     
     var canSubmit: Bool {

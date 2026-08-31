@@ -33,10 +33,7 @@ class MerchantDetailsViewModel: ObservableObject {
         guard let number = Int64(digits) else {
             return digits
         }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.groupingSeparator = "."
-        return formatter.string(from: NSNumber(value: number)) ?? digits
+        return MerchantModel.sharedNumberFormatter.string(from: NSNumber(value: number)) ?? digits
     }
     
     func formatTanggalInput(_ text: String) -> String {
@@ -51,24 +48,27 @@ class MerchantDetailsViewModel: ObservableObject {
         return formatted
     }
     
-    func parseTanggal(_ text: String) -> Date? {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: text)
+        return formatter
+    }()
+    
+    func parseTanggal(_ text: String) -> Date? {
+        return MerchantModel.sharedDateFormatter.date(from: text)
     }
     
     // MARK: VALIDATION
     var isNamaValid: Bool {
-        !nama.text.isEmpty && !nama.text.hasPrefix(" ") && !nama.text.hasSuffix(" ") && nama.text.count <= maxLengthNama
+        return MerchantModel.isNamaValid(nama.text)
     }
     
     var isNomorHpValid: Bool {
-        let digits = rawDigits(nomorHp.text)
-        return digits.isEmpty || (digits.count >= 10 && digits.count <= 13)
+        return MerchantModel.isNomorHpValid(nomorHp.text)
     }
     
     var isNominalValid: Bool {
-        !nominal.text.isEmpty && rawDigits(nominal.text).count <= maxLengthNominal
+        return MerchantModel.isNominalValid(nominal.text)
     }
     
     var isTanggalValid: Bool {

@@ -21,19 +21,14 @@ struct MerchantFormResultViewModel {
         guard let number = Int64(merchant.nominal) else {
             return merchant.nominal
         }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.groupingSeparator = "."
-        return formatter.string(from: NSNumber(value: number)) ?? merchant.nominal
+        return MerchantModel.sharedNumberFormatter.string(from: NSNumber(value: number)) ?? merchant.nominal
     }
     
     var displayTanggal: String {
         guard let date = merchant.tanggal else {
             return "-"
         }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
+        return MerchantModel.sharedDateFormatter.string(from: date)
     }
     
     var displayNamaUsaha: String {
@@ -49,9 +44,7 @@ struct MerchantFormResultViewModel {
         guard let date = merchant.tanggal else {
             return ""
         }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
+        return MerchantModel.sharedDateFormatter.string(from: date)
     }
     
     var draftNamaUsaha: String {
@@ -64,15 +57,13 @@ struct MerchantFormResultViewModel {
     
     // MARK: VALIDATION LOGIC
     var isDataValid: Bool {
-        let isKtpValid = merchant.ktp.count == 16
-        let isNpwpValid = !merchant.npwp.isEmpty && merchant.npwp.count <= 16
-        let isRekeningValid = !merchant.nomorRekening.isEmpty && merchant.nomorRekening.count <= 16
-        let isNamaUsahaValid = merchant.namaUsaha.isEmpty || (merchant.namaUsaha.count <= 23 && !merchant.namaUsaha.hasPrefix(" ") && !merchant.namaUsaha.hasSuffix(" "))
-        let isFotoValid = merchant.foto != nil
-        let isNamaValid = !merchant.nama.isEmpty && merchant.nama.count <= 100 && !merchant.nama.hasPrefix(" ") && !merchant.nama.hasSuffix(" ")
-        let isNomorHpValid = merchant.nomorHp.isEmpty || (merchant.nomorHp.count >= 10 && merchant.nomorHp.count <= 13)
-        let isNominalValid = !merchant.nominal.isEmpty && merchant.nominal.count <= 16
-        
-        return isKtpValid && isNpwpValid && isRekeningValid && isNamaUsahaValid && isFotoValid && isNamaValid && isNomorHpValid && isNominalValid
+        return MerchantModel.isKtpValid(merchant.ktp) &&
+               MerchantModel.isNpwpValid(merchant.npwp) &&
+               MerchantModel.isNomorRekeningValid(merchant.nomorRekening) &&
+               MerchantModel.isNamaUsahaValid(merchant.namaUsaha) &&
+               MerchantModel.isFotoValid(merchant.foto) &&
+               MerchantModel.isNamaValid(merchant.nama) &&
+               MerchantModel.isNomorHpValid(merchant.nomorHp) &&
+               MerchantModel.isNominalValid(merchant.nominal)
     }
 }

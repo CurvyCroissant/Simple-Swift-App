@@ -22,7 +22,6 @@ struct MerchantFormView: View {
                             if viewModel.ktp.text != formatted {
                                 viewModel.ktp.text = formatted
                             }
-                            repository.draftKtp = formatted
                         }
                         .opacity(repository.activeEditField == .none || repository.activeEditField == .ktp ? 1.0 : 0.0)
                         .disabled(repository.activeEditField != .none && repository.activeEditField != .ktp)
@@ -97,6 +96,12 @@ struct MerchantFormView: View {
                     viewModel.namaUsaha.text = repository.draftNamaUsaha
                 }
             }
+            .onDisappear {
+                repository.draftKtp = viewModel.ktp.text
+                repository.draftNpwp = viewModel.npwp.text
+                repository.draftNomorRekening = viewModel.nomorRekening.text
+                repository.draftNamaUsaha = viewModel.namaUsaha.text
+            }
         }
         bottomButton: {
                 Button {
@@ -110,11 +115,7 @@ struct MerchantFormView: View {
                             nama: repository.draftNama,
                             nomorHp: repository.draftNomorHp,
                             nominal: repository.draftNominal.filter { $0.isNumber },
-                            tanggal: {
-                                let df = DateFormatter()
-                                df.dateFormat = "yyyy-MM-dd"
-                                return df.date(from: repository.draftTanggal)
-                            }()
+                            tanggal: MerchantModel.sharedDateFormatter.date(from: repository.draftTanggal)
                         )
                         
                         if repository.activeEditField != .none {

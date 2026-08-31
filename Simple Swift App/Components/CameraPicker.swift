@@ -33,8 +33,7 @@ struct CameraPicker: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
-                // Compress image to JPEG to save space
-                parent.selectedImageData = image.jpegData(compressionQuality: 0.8)
+                parent.selectedImageData = image.jpegData(compressionQuality: 1.0)
             }
             parent.presentationMode.wrappedValue.dismiss()
         }

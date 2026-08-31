@@ -41,11 +41,7 @@ class MerchantRepository: ObservableObject {
         
         // LOGS
         let fotoStatus = merchant.foto != nil ? "true" : "false"
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let tanggalStr = merchant.tanggal != nil ? formatter.string(from: merchant.tanggal!) : "Kosong"
-        
+        let tanggalStr = merchant.tanggal != nil ? MerchantModel.sharedDateFormatter.string(from: merchant.tanggal!) : "Kosong"
         print("LOG: Successfully saved merchant. ktp: \(merchant.ktp), npwp: \(merchant.npwp), nomorRekening: \(merchant.nomorRekening), namaUsaha: \(merchant.namaUsaha), foto: \(fotoStatus), nama: \(merchant.nama), nomorHp: \(merchant.nomorHp), nominal: \(merchant.nominal), tanggal: \(tanggalStr)")
     }
     
