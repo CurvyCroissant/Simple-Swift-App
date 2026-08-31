@@ -1,4 +1,4 @@
-// Navigation/AppNavigator.swiftN
+// App/AppNavigator.swift
 
 import SwiftUI
 import Combine

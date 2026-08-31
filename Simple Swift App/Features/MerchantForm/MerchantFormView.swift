@@ -1,4 +1,4 @@
-// Views/MerchantFormView.swift
+// Features/MerchantForm/MerchantFormView.swift
 
 import SwiftUI
 

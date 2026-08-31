@@ -1,4 +1,4 @@
-//  ViewModels/MerchantDetailsViewModel.swift
+//  Features/MerchantDetails/MerchantDetailsViewModel.swift
 
 import SwiftUI
 import Combine

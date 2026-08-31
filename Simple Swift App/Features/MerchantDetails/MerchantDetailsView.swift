@@ -1,4 +1,4 @@
-//  Views/MerchantDetailsView.swift
+//  Features/MerchantDetails/MerchantDetailsView.swift
 
 import SwiftUI
 

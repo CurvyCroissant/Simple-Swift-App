@@ -1,3 +1,5 @@
+// Features/MerchantPhoto/MerchantPhotoView.swift
+
 import SwiftUI
 import PhotosUI
 

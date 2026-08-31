@@ -1,4 +1,4 @@
-//  Components/CameraPicker.swift
+// Components/CameraPicker.swift
 
 import SwiftUI
 import UIKit

@@ -1,18 +1,7 @@
-// ViewModels/MerchantFormViewModel.swift
+// Features/MerchantForm/MerchantFormViewModel.swift
 
 import SwiftUI
 import Combine
-
-struct ValidatedField {
-    var text: String = "" {
-        didSet {
-            if text != oldValue { 
-                hasInteracted = true 
-            }
-        }
-    }
-    var hasInteracted: Bool = false
-}
 
 class MerchantFormViewModel: ObservableObject {
     @Published var ktp = ValidatedField()

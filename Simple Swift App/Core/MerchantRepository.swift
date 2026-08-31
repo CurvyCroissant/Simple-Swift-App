@@ -1,26 +1,7 @@
-// Data/MerchantRepository.swift
+// Core/MerchantRepository.swift
 
 import Foundation
 import Combine
-
-// MARK: DATA MODEL
-struct MerchantModel: Hashable, Codable {
-    
-    // MerchantFormView
-    let ktp: String
-    let npwp: String
-    let nomorRekening: String
-    let namaUsaha: String
-    
-    // MerchantPhotoView
-    var foto: Data? = nil
-    
-    // MerchantDetailsView
-    var nama: String = ""
-    var nomorHp: String = ""
-    var nominal: String = ""
-    var tanggal: Date? = nil
-}
 
 enum EditField: Equatable {
     case none, ktp, npwp, nomorRekening, namaUsaha, foto, nama, nomorHp, nominal, tanggal
@@ -58,6 +39,7 @@ class MerchantRepository: ObservableObject {
         draftNominal = ""
         draftTanggal = ""
         
+        // LOGS
         let fotoStatus = merchant.foto != nil ? "true" : "false"
         
         let formatter = DateFormatter()
@@ -69,6 +51,7 @@ class MerchantRepository: ObservableObject {
     
     func reset() {
         savedMerchants.removeAll()
+        
         draftPhoto = nil
         draftKtp = ""
         draftNpwp = ""
