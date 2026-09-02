@@ -52,8 +52,6 @@ struct MerchantPhotoView: View {
                         .buttonStyle(.plain)
                     }
                     .padding(.vertical, 5)
-                    .opacity(repository.activeEditField == .none || repository.activeEditField == .foto ? 1.0 : 0.0)
-                    .disabled(repository.activeEditField != .none && repository.activeEditField != .foto)
                 }
                 .listRowBackground(
                     Rectangle()
@@ -78,12 +76,7 @@ struct MerchantPhotoView: View {
                 if viewModel.canSubmit {
                     var nextMerchant = merchant
                     nextMerchant.foto = viewModel.selectedImageData
-                    
-                    if repository.activeEditField != .none {
-                        navigator.path = [.result(merchant: nextMerchant)]
-                    } else {
-                        navigator.navigate(to: .details(merchant: nextMerchant))
-                    }
+                    navigator.navigate(to: .details(merchant: nextMerchant))
                 }
             } label: {
                 Text("Lanjut")

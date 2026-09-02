@@ -14,7 +14,7 @@ struct BaseFormLayout<Content: View, BottomButton: View>: View {
                 Color(red: 0.09, green: 0.36, blue: 0.62)
                     .frame(height: 350)
                     .ignoresSafeArea(edges: .top)
-                Color.white
+                Color(uiColor: .systemGroupedBackground)
                     .ignoresSafeArea(edges: .bottom)
             }
             

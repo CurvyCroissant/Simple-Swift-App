@@ -19,8 +19,8 @@ struct Simple_Swift_App: App {
                             MerchantDetailsView(merchant: merchant)
                         case let .result(merchant):
                             MerchantFormResultView(merchant: merchant)
-                        case .editForm:
-                            MerchantFormView()
+                        case let .editField(merchant):
+                            MerchantEditView(merchant: merchant)
                         }
                     }
             }

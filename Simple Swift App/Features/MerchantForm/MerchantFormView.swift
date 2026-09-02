@@ -23,8 +23,6 @@ struct MerchantFormView: View {
                                 viewModel.ktp.text = formatted
                             }
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .ktp ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .ktp)
                         
                         ValidatedTextField(
                             title: "NPWP",
@@ -39,8 +37,6 @@ struct MerchantFormView: View {
                             }
                             repository.draftNpwp = limited
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .npwp ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .npwp)
                         
                         ValidatedTextField(
                             title: "Nomor Rekening",
@@ -54,8 +50,6 @@ struct MerchantFormView: View {
                             }
                             repository.draftNomorRekening = limited
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .nomorRekening ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .nomorRekening)
                         
                         ValidatedTextField(
                             title: "Nama Usaha di Stiker QRIS",
@@ -70,8 +64,6 @@ struct MerchantFormView: View {
                             }
                             repository.draftNamaUsaha = finalValue
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .namaUsaha ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .namaUsaha)
                     }
                 }
                 .listRowBackground(
@@ -117,12 +109,7 @@ struct MerchantFormView: View {
                             nominal: repository.draftNominal.filter { $0.isNumber },
                             tanggal: MerchantModel.sharedDateFormatter.date(from: repository.draftTanggal)
                         )
-                        
-                        if repository.activeEditField != .none {
-                                navigator.path = [.result(merchant: newMerchant)] 
-                            } else {
-                                navigator.navigate(to: .photoUpload(merchant: newMerchant))
-                            }
+                        navigator.navigate(to: .photoUpload(merchant: newMerchant))
                     }
                 } label: {
                     Text("Lanjut")

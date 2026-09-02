@@ -7,7 +7,7 @@ enum Route: Hashable {
     case result(merchant: MerchantModel)
     case photoUpload(merchant: MerchantModel)
     case details(merchant: MerchantModel)
-    case editForm(merchant: MerchantModel)
+    case editField(merchant: MerchantModel)
 }
 
 class AppNavigator: ObservableObject {

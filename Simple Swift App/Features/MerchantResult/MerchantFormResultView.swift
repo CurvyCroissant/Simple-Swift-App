@@ -13,7 +13,7 @@ struct MerchantFormResultView: View {
         }
     
     // Repopulate drafts and routes to target edit page
-    private func triggerEdit(field: EditField, route: Route) {
+    private func triggerEdit(field: EditField) {
         repository.draftKtp = viewModel.displayKTP
         repository.draftNpwp = merchant.npwp
         repository.draftNomorRekening = merchant.nomorRekening
@@ -25,11 +25,11 @@ struct MerchantFormResultView: View {
         repository.draftTanggal = viewModel.draftTanggal
         
         repository.activeEditField = field
-        navigator.path = [.result(merchant: merchant), route]
+        navigator.path = [.result(merchant: merchant), .editField(merchant: merchant)]
     }
     
     // UI Builder for editable text rows
-    private func editRow(title: String, value: String, field: EditField, route: Route) -> some View {
+    private func editRow(title: String, value: String, field: EditField) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack(spacing: 12) {
                 Text(title)
@@ -37,7 +37,7 @@ struct MerchantFormResultView: View {
                     .foregroundColor(Color(red: 0.09, green: 0.36, blue: 0.62))
                 
                 Button {
-                    triggerEdit(field: field, route: route)
+                    triggerEdit(field: field)
                 } label: {
                     Image(systemName: "pencil")
                         .font(.caption2.weight(.heavy))
@@ -55,13 +55,13 @@ struct MerchantFormResultView: View {
         BaseFormLayout(title: "Profil Pengguna") {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 26) {
-                                    editRow(title: "No KTP", value: viewModel.displayKTP, field: .ktp, route: .editForm(merchant: merchant))
-                                    editRow(title: "Nama", value: merchant.nama, field: .nama, route: .details(merchant: merchant))
-                                    editRow(title: "NPWP", value: merchant.npwp, field: .npwp, route: .editForm(merchant: merchant))
-                                    editRow(title: "No Rekening", value: merchant.nomorRekening, field: .nomorRekening, route: .editForm(merchant: merchant))
-                                    editRow(title: "No HP", value: viewModel.displayNomorHp, field: .nomorHp, route: .details(merchant: merchant))
-                                    editRow(title: "Tanggal", value: viewModel.displayTanggal, field: .tanggal, route: .details(merchant: merchant))
-                                    editRow(title: "Nominal", value: "Rp \(viewModel.displayNominal)", field: .nominal, route: .details(merchant: merchant))
+                                    editRow(title: "No KTP", value: viewModel.displayKTP, field: .ktp)
+                                    editRow(title: "Nama", value: merchant.nama, field: .nama)
+                                    editRow(title: "NPWP", value: merchant.npwp, field: .npwp)
+                                    editRow(title: "No Rekening", value: merchant.nomorRekening, field: .nomorRekening)
+                                    editRow(title: "No HP", value: viewModel.displayNomorHp, field: .nomorHp)
+                                    editRow(title: "Tanggal", value: viewModel.displayTanggal, field: .tanggal)
+                                    editRow(title: "Nominal", value: "Rp \(viewModel.displayNominal)", field: .nominal)
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Foto")
@@ -78,7 +78,7 @@ struct MerchantFormResultView: View {
                                     .cornerRadius(10)
                                 
                                 Button {
-                                    triggerEdit(field: .foto, route: .photoUpload(merchant: merchant))
+                                    triggerEdit(field: .foto)
                                 } label: {
                                     Text("Edit")
                                         .font(.caption)
@@ -96,7 +96,7 @@ struct MerchantFormResultView: View {
                                 .font(.title3)
                         }
                     }
-                    editRow(title: "Nama Usaha di Stiker QRIS", value: viewModel.displayNamaUsaha, field: .namaUsaha, route: .editForm(merchant: merchant))
+                    editRow(title: "Nama Usaha di Stiker QRIS", value: viewModel.displayNamaUsaha, field: .namaUsaha)
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)

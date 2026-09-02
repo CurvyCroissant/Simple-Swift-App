@@ -26,8 +26,6 @@ struct MerchantDetailsView: View {
                             }
                             repository.draftNama = formatted
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .nama ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .nama)
                         
                         ValidatedTextField(
                             title: "No HP",
@@ -41,8 +39,6 @@ struct MerchantDetailsView: View {
                             }
                             repository.draftNomorHp = digits
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .nomorHp ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .nomorHp)
                         
                         ValidatedTextField(
                             title: "Nominal",
@@ -57,8 +53,6 @@ struct MerchantDetailsView: View {
                             }
                             repository.draftNominal = formatted
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .nominal ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .nominal)
                         
                         ValidatedTextField(
                             title: "Tanggal",
@@ -72,8 +66,6 @@ struct MerchantDetailsView: View {
                             }
                             repository.draftTanggal = formatted
                         }
-                        .opacity(repository.activeEditField == .none || repository.activeEditField == .tanggal ? 1.0 : 0.0)
-                        .disabled(repository.activeEditField != .none && repository.activeEditField != .tanggal)
                     }
                 }
                 .listRowBackground(
@@ -99,13 +91,8 @@ struct MerchantDetailsView: View {
                     finalMerchant.nomorHp = viewModel.rawDigits(viewModel.nomorHp.text)
                     finalMerchant.nominal = viewModel.rawDigits(viewModel.nominal.text)
                     finalMerchant.tanggal = viewModel.parseTanggal(viewModel.tanggal.text)
-                    
-                    if repository.activeEditField != .none {
-                        navigator.path = [.result(merchant: finalMerchant)]
-                    } else {
-                        repository.save(merchant: finalMerchant)
-                        navigator.navigate(to: .result(merchant: finalMerchant))
-                    }
+                    repository.save(merchant: finalMerchant)
+                    navigator.navigate(to: .result(merchant: finalMerchant))
                 }            } label: {
                 Text("Lanjut")
                     .bold()
