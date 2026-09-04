@@ -10,9 +10,27 @@
 		6FFC5C58303ED35C0032E1F0 /* Simple Swift App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Swift App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6FD63F67304AA13E00A590C3 /* Exceptions for "Simple Swift App" folder in "Simple Swift App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Simple-Swift-App-Info.plist",
+			);
+			target = 6FF2B5403035A04B00B3F892 /* Simple Swift App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6F14D4B230491425002D1C54 /* SwiftUI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		6FF2B5433035A04B00B3F892 /* Simple Swift App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6FD63F67304AA13E00A590C3 /* Exceptions for "Simple Swift App" folder in "Simple Swift App" target */,
+			);
 			path = "Simple Swift App";
 			sourceTree = "<group>";
 		};
@@ -34,6 +52,7 @@
 			children = (
 				6FF2B5433035A04B00B3F892 /* Simple Swift App */,
 				6FFC5C58303ED35C0032E1F0 /* Simple Swift App.app */,
+				6F14D4B230491425002D1C54 /* SwiftUI */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,6 +72,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				6F14D4B230491425002D1C54 /* SwiftUI */,
 				6FF2B5433035A04B00B3F892 /* Simple Swift App */,
 			);
 			name = "Simple Swift App";
@@ -245,8 +265,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Simple-Swift-App-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "App requires camera access to upload photos";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -278,8 +298,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Simple-Swift-App-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "App requires camera access to upload photos";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
