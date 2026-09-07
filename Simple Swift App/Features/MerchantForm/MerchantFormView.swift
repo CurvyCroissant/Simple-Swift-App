@@ -10,10 +10,10 @@ class MerchantFormView: BaseFormView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        stackView.addArrangedSubview(ktpField)
-        stackView.addArrangedSubview(npwpField)
-        stackView.addArrangedSubview(rekeningField)
-        stackView.addArrangedSubview(namaUsahaField)
+        formCard.addField(ktpField)
+        formCard.addField(npwpField)
+        formCard.addField(rekeningField)
+        formCard.addField(namaUsahaField)
         
         submitButton.setTitle("Lanjut", for: .normal)
     }

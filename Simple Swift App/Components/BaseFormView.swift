@@ -5,9 +5,8 @@ import UIKit
 class BaseFormView: UIView {
     let scrollView = UIScrollView()
     let contentView = UIView()
-    let glassCard = LiquidGlassView()
-    let stackView = UIStackView()
-    let submitButton = UIButton(type: .system)
+    let formCard = FormCardView()
+    let submitButton = PrimaryButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,28 +28,8 @@ class BaseFormView: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         
-        glassCard.translatesAutoresizingMaskIntoConstraints = false
-        glassCard.clipsToBounds = true
-        glassCard.layer.borderWidth = 1
-        glassCard.layer.borderColor = UIColor.white.withAlphaComponent(0.6).cgColor
-        
-        if #available(iOS 26.0, *) {
-            glassCard.cornerConfiguration = .uniformCorners(radius: .fixed(15))
-        } else {
-            glassCard.layer.cornerRadius = 15
-        }
-        
-        contentView.addSubview(glassCard)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 15
-        glassCard.contentView.addSubview(stackView)
-        
-        submitButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
-        submitButton.backgroundColor = UIColor(red: 0.09, green: 0.36, blue: 0.62, alpha: 1)
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.layer.cornerRadius = 10
+        formCard.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(formCard)
         
         NSLayoutConstraint.activate([
             blueBackground.topAnchor.constraint(equalTo: topAnchor),
@@ -73,15 +52,10 @@ class BaseFormView: UIView {
             contentView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor),
 
-            glassCard.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            glassCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            glassCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            glassCard.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-
-            stackView.topAnchor.constraint(equalTo: glassCard.contentView.topAnchor, constant: 16),
-            stackView.leadingAnchor.constraint(equalTo: glassCard.contentView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: glassCard.contentView.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: glassCard.contentView.bottomAnchor, constant: -16)
+            formCard.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            formCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            formCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            formCard.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
     

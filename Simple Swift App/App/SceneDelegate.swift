@@ -15,11 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // initialize physical window
         let window = UIWindow(windowScene: windowScene)
         
-        // define first screen
-        let rootVC = MerchantFormViewController()
-        
         // initialize global router
-        let navigationController = UINavigationController(rootViewController: rootVC)
+        let navigationController = UINavigationController()
         
         // UI Kit's .toolbarBackground, .toolbarColorScheme
         let appearance = UINavigationBarAppearance()
@@ -35,6 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.scrollEdgeAppearance = appearance
         navigationController.navigationBar.compactAppearance = appearance
         navigationController.navigationBar.tintColor = UIColor.white
+        
+        Navigator.shared.start(in: navigationController)
         
         // mount & display
         window.rootViewController = navigationController

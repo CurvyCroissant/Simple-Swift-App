@@ -161,8 +161,6 @@ class MerchantFormViewController: BaseFormViewController {
             tanggal: MerchantModel.sharedDateFormatter.date(from: repo.draftTanggal)
         )
         
-         let photoVC = MerchantPhotoViewController()
-         photoVC.merchant = newMerchant
-         navigationController?.pushViewController(photoVC, animated: true)
+        Navigator.shared.showMerchantPhoto(for: newMerchant)
     }
 }

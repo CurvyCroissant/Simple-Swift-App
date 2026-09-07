@@ -55,9 +55,9 @@ class MerchantPhotoViewController: BaseFormViewController {
         
         setEmptyImageState()
         
-        stackView.addArrangedSubview(uploadTitleLabel)
-        stackView.addArrangedSubview(infoLabel)
-        stackView.addArrangedSubview(imageContainerButton)
+//        stackView.addArrangedSubview(uploadTitleLabel)
+//        stackView.addArrangedSubview(infoLabel)
+//        stackView.addArrangedSubview(imageContainerButton)
         
         submitButton.setTitle("Lanjut", for: .normal)
         submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
@@ -143,11 +143,7 @@ class MerchantPhotoViewController: BaseFormViewController {
         
         var nextMerchant = validMerchant
         nextMerchant.foto = MerchantRepository.shared.draftPhoto
-        
-        // Pass to step 3
-        // let detailsVC = MerchantDetailsViewController()
-        // detailsVC.merchant = nextMerchant
-        // navigationController?.pushViewController(detailsVC, animated: true)
+        Navigator.shared.showMerchantDetails(for: nextMerchant)
     }
 }
 
