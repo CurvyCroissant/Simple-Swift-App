@@ -10,6 +10,7 @@ class MerchantFormView: BaseFormView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         formCard.addField(ktpField)
         formCard.addField(npwpField)
         formCard.addField(rekeningField)
