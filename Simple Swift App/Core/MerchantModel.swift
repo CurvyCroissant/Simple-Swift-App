@@ -37,6 +37,16 @@ struct MerchantModel: Hashable, Codable {
     }
     
     // MARK: CENTRALIZED BUSINESS RULES
+    static func isTanggalValid(_ text: String) -> Bool {
+        if text.isEmpty {
+            return true
+        }
+        if text.count != 10 {
+            return false
+        }
+        return sharedDateFormatter.date(from: text) != nil
+    }
+    
     static func isKtpValid(_ text: String) -> Bool {
         return isDigitCountValid(text, min: 16, max: 16)
     }

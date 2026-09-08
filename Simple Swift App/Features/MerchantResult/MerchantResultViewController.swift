@@ -1,3 +1,7 @@
 //  Features/MerchantResult/MerchantResultViewController.swift
 
-import Foundation
+import UIKit
+
+class MerchantResultViewController: UIViewController {
+    
+}

@@ -26,6 +26,14 @@ class Navigator {
     }
     
     func showMerchantDetails(for merchant: MerchantModel) {
-        //
+        let detailsVC = MerchantDetailsViewController()
+        detailsVC.merchant = merchant
+        navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    func showMerchantResult(for merchant: MerchantModel) {
+        let resultVC = MerchantResultViewController()
+        resultVC.merchant = merchant
+        navigationController?.pushViewController(resultVC, animated: true)
     }
 }
