@@ -86,7 +86,15 @@ class MerchantPhotoViewController: BaseFormViewController {
         }
         var nextMerchant = validMerchant
         nextMerchant.foto = MerchantRepository.shared.draftPhoto
-        Navigator.shared.showMerchantDetails(for: nextMerchant)
+        
+        let repo = MerchantRepository.shared
+        if repo.activeEditField != .none {
+            repo.activeEditField = .none
+            Navigator.shared.returnToResult(with: nextMerchant)
+        } else {
+            Navigator.shared.showMerchantDetails(for: nextMerchant)
+        }
+
     }
 }
 

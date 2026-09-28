@@ -160,7 +160,12 @@ class MerchantDetailsViewController: BaseFormViewController {
         finalMerchant.nominal = (nominalField.textField.text ?? "").filter { $0.isNumber }
         finalMerchant.tanggal = MerchantModel.sharedDateFormatter.date(from: tanggalField.textField.text ?? "")
         
-        repo.save(merchant: finalMerchant)
-        Navigator.shared.showMerchantResult(for: finalMerchant)
+        if repo.activeEditField != .none {
+            repo.activeEditField = .none
+            Navigator.shared.returnToResult(with: finalMerchant)
+        } else {
+            repo.save(merchant: finalMerchant)
+            Navigator.shared.showMerchantResult(for: finalMerchant)
+        }
     }
 }

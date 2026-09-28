@@ -36,4 +36,30 @@ class Navigator {
         resultVC.merchant = merchant
         navigationController?.pushViewController(resultVC, animated: true)
     }
+    
+    func showEditField(for merchant: MerchantModel, field: EditField) {
+        switch field {
+        case .ktp, .npwp, .nomorRekening, .namaUsaha:
+            showMerchantForm()
+        case .foto:
+            showMerchantPhoto(for: merchant)
+        case .nama, .nomorHp, .nominal, .tanggal:
+            showMerchantDetails(for: merchant)
+        case .none:
+            break
+        }
+    }
+    
+    func returnToResult(with merchant: MerchantModel) {
+        guard let nav = navigationController,
+              let resultVC = nav.viewControllers.last(where: { $0 is MerchantResultViewController }) as? MerchantResultViewController else {
+            return
+        }
+        resultVC.update(with: merchant)
+        nav.popToViewController(resultVC, animated: true)
+    }
+    
+    func popToRoot() {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }

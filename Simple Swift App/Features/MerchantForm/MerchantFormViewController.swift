@@ -161,6 +161,11 @@ class MerchantFormViewController: BaseFormViewController {
             tanggal: MerchantModel.sharedDateFormatter.date(from: repo.draftTanggal)
         )
         
-        Navigator.shared.showMerchantPhoto(for: newMerchant)
+        if repo.activeEditField != .none {
+            repo.activeEditField = .none
+            Navigator.shared.returnToResult(with: newMerchant)
+        } else {
+            Navigator.shared.showMerchantPhoto(for: newMerchant)
+        }
     }
 }
